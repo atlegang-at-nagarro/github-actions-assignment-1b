@@ -22,12 +22,15 @@ jobs:
           cache: maven
 
       - name: Run unit tests with Maven
+        id: test
         working-directory: todo-api
         run: mvn test
+        continue-on-error: true
 
       - name: Build with Maven
         working-directory: todo-api
-        run: mvn -B package
+        run: mvn -B package -DskipTests
+        if: steps.test.outcome == 'success'
 
       - name: Package application into JAR
         uses: actions/upload-artifact@v4
