@@ -25,7 +25,7 @@ jobs:
 
       - name: Build with Maven
         working-directory: todo-api
-        run: mvn -B publish
+        run: mvn -B package
 
       - name: Publish test reports
         uses: actions/upload-artifact@v4
