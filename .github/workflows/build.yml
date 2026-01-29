@@ -2,9 +2,9 @@ name: Java Ci with Maven
 
 on:
   push:
-    branches: ["main"]
+    branches: ["feature/*", "develop"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "develop"]
 
 jobs:
   build:
@@ -25,10 +25,16 @@ jobs:
 
       - name: Build with Maven
         working-directory: todo-api
-        run: mvn -B publish
+        run: mvn -B package
+
+      - name: Package application JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: todo-api-jar
+          path: todo-api/target/*.jar
 
       - name: Publish test reports
-        working-directory: todo-api
+        uses: actions/upload-artifact@v4
         with:
           name: surefire-test-reports
           path: todo-api/target/surefire-reports
