@@ -19,6 +19,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Run unit tests
+        working-directory: todo-api
+        run: mvn test
+
       - name: Build with Maven
         working-directory: todo-api
-        run: mvn -B package --file pom.xml
+        run: mvn -B publish
+
+      - name: Publish test reports
+        working-directory: todo-api
+        with:
+          name: surefire-test-reports
+          path: todo-api/target/surefire-reports
