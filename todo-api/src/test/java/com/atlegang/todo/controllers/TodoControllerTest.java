@@ -60,7 +60,7 @@ class TodoControllerTest {
         // Assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody()).hasSize(3);
+        assertThat(response.getBody()).hasSize(4);
 
         verify(todoRepository).findAll();
         verifyNoInteractions(todoService, todoMapper);
