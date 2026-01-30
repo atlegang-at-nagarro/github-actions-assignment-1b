@@ -39,12 +39,14 @@ jobs:
           path: todo-api/target/*.jar
 
       - name: Publish test reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: surefire-test-reports
           path: todo-api/target/surefire-reports
 
       - name: Publish test coverage report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-coverage-report
