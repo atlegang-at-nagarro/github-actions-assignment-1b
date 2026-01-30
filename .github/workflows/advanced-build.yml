@@ -28,11 +28,12 @@ jobs:
         continue-on-error: true
 
       - name: Build with Maven
+        if: steps.test.outcome == 'success'
         working-directory: todo-api
         run: mvn -B package -DskipTests
-        if: steps.test.outcome == 'success'
 
       - name: Package application into JAR
+        if: steps.test.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: todo-api-jar
