@@ -33,11 +33,16 @@ jobs:
         run: mvn -B package -DskipTests
 
       - name: Package application into JAR
+        id: package
         if: steps.test.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: todo-api-jar
           path: todo-api/target/*.jar
+
+      - name: Build Docker image of application
+        working-directory: todo-api
+        run: docker build -t my-app:test .
 
       - name: Publish test reports
         if: always()
