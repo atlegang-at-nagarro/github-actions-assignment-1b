@@ -41,8 +41,16 @@ jobs:
           path: todo-api/target/*.jar
 
       - name: Build Docker image of application
+        if: steps.test.outcome == 'success'
         working-directory: todo-api
         run: docker build -t my-app:test .
+
+      - name: Deploy Docker container
+        if: steps.test.outcome == 'success'
+        run: |
+          docker stop todo-api || true
+          docker run todo-api || true
+          docker run -d --name todo-api -p 8080:8080 todo-api:latest
 
       - name: Publish test reports
         if: always()
