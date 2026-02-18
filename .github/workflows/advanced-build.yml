@@ -43,7 +43,7 @@ jobs:
       - name: Build Docker image of application
         if: steps.test.outcome == 'success'
         working-directory: todo-api
-        run: docker build -t my-app:test .
+        run: docker build -t my-app:latest .
 
       - name: Deploy Docker container
         if: steps.test.outcome == 'success'
