@@ -8,7 +8,7 @@ pipeline {
         ECR_REGISTRY          = '591120834795.dkr.ecr.af-south-1.amazonaws.com'
         ECR_REPO              = 'todo-api'
         IMAGE_TAG             = 'latest'
-        EC2_HOST              = '51.21.128.14'
+        EC2_HOST              = '13.53.216.108'
     }
 
     stages {
